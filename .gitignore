@@ -4,6 +4,16 @@
 # Log file
 *.log
 
+.classpath
+.project
+.settings/
+.mvn/
+target/
+.metadata/
+Servers/
+*mvnw
+*mvnw.cmd
+
 # BlueJ files
 *.ctxt
 
