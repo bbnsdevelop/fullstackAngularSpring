@@ -1,5 +1,6 @@
 package br.com.fullstackAngularSpring.rest.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class CategoriaController implements CategoriaResource{
 	}
 	@Override
 	@PostMapping
-	public ResponseEntity<Void> setCategoria(@RequestBody @Validated CategoriaRequest requeste) {
+	public ResponseEntity<Void> setCategoria(@RequestBody @Validated CategoriaRequest requeste, HttpServletResponse response) {
 		categoriaService.create(requeste);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
