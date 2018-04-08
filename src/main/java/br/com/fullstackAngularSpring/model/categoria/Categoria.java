@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name="categoria")
+@Entity()
+@Table(name="categoria")
 public class Categoria {
 	
 	@Id	
@@ -63,8 +65,5 @@ public class Categoria {
 		} else if (!nomeCategoria.equals(other.nomeCategoria))
 			return false;
 		return true;
-	}
-
-	
-	
+	}	
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.fullstackAngularSpring.model.categoria.Categoria;
 
 @Repository
-public interface categoriaRepository extends JpaRepository<Categoria, Long>{
+public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 
 }
