@@ -8,5 +8,5 @@ public interface CategoriaService {
 	
 	CategoriaResponseList getAll();
 	CategoriaResponse getById(Long id);
-	void create(CategoriaRequest requeste);
+	CategoriaResponse create(CategoriaRequest requeste);
 }

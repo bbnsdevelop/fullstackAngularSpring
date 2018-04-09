@@ -43,10 +43,14 @@ public class CategoriaServiceImpl implements CategoriaService{
 		return buildResponse.build();
 	}
 	@Override
-	public void create(CategoriaRequest requeste) {
+	public CategoriaResponse create(CategoriaRequest requeste) {
 		CategoriaBuilderEntity builderEntity = CategoriaBuilderEntity.create()
 				.name(requeste.getNomeCategoria());
-		categoriaRepository.save(builderEntity.build());
+		Categoria categoria = categoriaRepository.save(builderEntity.build());
+		CategoriaResponseBuilder buildResponse = CategoriaResponseBuilder.create()
+				.id(categoria.getId())
+				.nomeCategoria(categoria.getNomeCategoria());		
+		return buildResponse.build();
 	}
 
 }
