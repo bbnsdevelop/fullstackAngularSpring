@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.fullstackAngularSpring.builders.CategoriaBuilderEntity;
 import br.com.fullstackAngularSpring.builders.CategoriaResponseBuilder;
+import br.com.fullstackAngularSpring.exceptions.FindException;
 import br.com.fullstackAngularSpring.model.categoria.Categoria;
 import br.com.fullstackAngularSpring.repository.categoria.CategoriaRepository;
 import br.com.fullstackAngularSpring.rest.request.CategoriaRequest;
@@ -36,7 +37,7 @@ public class CategoriaServiceImpl implements CategoriaService{
 	}
 	@Override
 	public CategoriaResponse getById(Long id) {
-		Categoria categoria = categoriaRepository.findById(id).get();
+		Categoria categoria = categoriaRepository.findById(id).orElseThrow(FindException::new);
 		CategoriaResponseBuilder buildResponse = CategoriaResponseBuilder.create()
 				.id(categoria.getId())
 				.nomeCategoria(categoria.getNomeCategoria());		
