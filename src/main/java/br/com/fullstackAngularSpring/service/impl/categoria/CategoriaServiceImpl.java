@@ -53,5 +53,60 @@ public class CategoriaServiceImpl implements CategoriaService{
 				.nomeCategoria(categoria.getNomeCategoria());		
 		return buildResponse.build();
 	}
+	
+	/*
+	
+	
+	public String getJsonCep(String cep) {
+        try {
+            log.debug("REST request to get Endereco on viacep.com.br: {}", cep);
+            URL url = new URL("http://viacep.com.br/ws/" + cep + "/json");
+            URLConnection urlConnection = url.openConnection();
+            InputStream is = urlConnection.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            StringBuilder jsonSb = new StringBuilder();
+
+            br.lines().forEach(l -> jsonSb.append(l.trim()));
+
+            return jsonSb.toString();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+	
+	// build
+	
+	 default  List<CorretagemCorretorDTO> toDtos(List<CorretagemCorretor> corretagemCorretores){
+    	List<CorretagemCorretorDTO> CorretagemCorretoresDTO = new ArrayList<>();
+    	
+    	for (Iterator<?> it = corretagemCorretores.iterator(); it.hasNext(); ) {
+			Object[] myResult = (Object[]) it.next();			
+			
+			Long id = (Long) myResult[0];
+			Float valorPorcetagemCorretagem = (Float) myResult[1];
+			String indentificadoProLabore = (String) myResult[2];
+			LocalDate dataAlteracao = (LocalDate) myResult[3];
+			String codigoControleVersao = (String) myResult[4];
+			Long crtg = (Long) myResult[5];
+			Long cort = (Long) myResult[6];
+			String descricaoCorretor = (String) myResult[7];
+			CorretagemCorretorDTO dto = new CorretagemCorretorDTO();
+			dto.setId(id);
+			dto.setValorPorcetagemCorretagem(valorPorcetagemCorretagem);
+			dto.setIndentificadoProLabore(indentificadoProLabore);
+			dto.setDataAlteracao(dataAlteracao);
+			dto.setCodigoControleVersao(codigoControleVersao);
+			dto.setCrtg(crtg);
+			dto.setCort(cort);
+			dto.setDescricaoCorretor(descricaoCorretor);
+			CorretagemCorretoresDTO.add(dto);									
+		}
+		return CorretagemCorretoresDTO;
+	}
+	
+	
+	*/
 
 }
