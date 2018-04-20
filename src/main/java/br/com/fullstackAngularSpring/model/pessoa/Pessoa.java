@@ -1,11 +1,15 @@
 package br.com.fullstackAngularSpring.model.pessoa;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.fullstackAngularSpring.model.endereco.Endereco;
@@ -22,42 +26,78 @@ public class Pessoa {
 	@Column(name = "nome", nullable = false)
 	private String nome;
 	
-	@Embedded
-	private Endereco endereco;
+	@Column(name = "cpf", nullable = false)
+	private String cpf;
 	
-	@Column(name = "ativo", nullable = false)
-	private Boolean ativo;
+	@Column(name = "rg", nullable = false)
+	private String rg;
+
+	@Column(name = "data_nasci", nullable = false)
+	private LocalDate dataNascimento;
+
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Endereco> enderecos;
+
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getNome() {
 		return nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
+
+	public String getRg() {
+		return rg;
 	}
 
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
+
+	public void setRg(String rg) {
+		this.rg = rg;
 	}
+
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
 	
 }

@@ -1,17 +1,64 @@
 package br.com.fullstackAngularSpring.model.endereco;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Embeddable
+import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
+
+/**
+ * @author codeit18
+ *
+ */
+@Entity
+@Table(name = "endereco")
 public class Endereco {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false, unique = true)
+	private Long codigo;
+	
+	@Column(name = "logradouro", nullable = false)
 	private String logradouro;
+	
+	@Column(name = "numero", nullable = false)	
 	private String numero;
+	
+	@Column(name = "complemento")
 	private String complemento;
+	
+	@Column(name = "bairro", nullable = false)
 	private String bairro;
+	
+	@Column(name = "cep", nullable = false)
 	private String cep;
+	
+	@Column(name = "cidade", nullable = false)
 	private String cidade;
+	
+	@Column(name = "estado", nullable = false)
 	private String estado;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pessoa_id")
+	private Pessoa pessoa;
+	
+	@Column(name = "flag_ende_princ", nullable = false)
+	private String flagEnderecoPrincipal;
+	
+	public Long getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -54,6 +101,13 @@ public class Endereco {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+	
 	
 	
 }

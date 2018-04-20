@@ -15,7 +15,7 @@ import br.com.fullstackAngularSpring.service.cep.CepService;
 
 @Service
 public class CepServiceImpl implements CepService{
-	private static final Logger logger = LogManager.getLogger(CepServiceImpl.class);
+//	private static final Logger logger = LogManager.getLogger(CepServiceImpl.class);
 	@Override
 	public CepEndereco getCep(String buscarCep) {
 		Gson gson = new Gson();
