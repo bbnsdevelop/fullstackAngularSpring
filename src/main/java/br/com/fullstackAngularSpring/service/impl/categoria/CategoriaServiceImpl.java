@@ -56,26 +56,6 @@ public class CategoriaServiceImpl implements CategoriaService{
 	
 	/*
 	
-	
-	public String getJsonCep(String cep) {
-        try {
-            log.debug("REST request to get Endereco on viacep.com.br: {}", cep);
-            URL url = new URL("http://viacep.com.br/ws/" + cep + "/json");
-            URLConnection urlConnection = url.openConnection();
-            InputStream is = urlConnection.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-            StringBuilder jsonSb = new StringBuilder();
-
-            br.lines().forEach(l -> jsonSb.append(l.trim()));
-
-            return jsonSb.toString();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-	
 	// build
 	
 	 default  List<CorretagemCorretorDTO> toDtos(List<CorretagemCorretor> corretagemCorretores){
