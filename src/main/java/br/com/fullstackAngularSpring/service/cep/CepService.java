@@ -1,7 +1,7 @@
 package br.com.fullstackAngularSpring.service.cep;
 
-import br.com.fullstackAngularSpring.rest.response.CepEndereco;
+import br.com.fullstackAngularSpring.rest.response.CepEnderecoResponse;
 
 public interface CepService {
-	CepEndereco getCep(String buscarCep);
+	CepEnderecoResponse getCep(String buscarCep);
 }

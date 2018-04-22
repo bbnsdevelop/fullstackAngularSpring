@@ -1,6 +1,7 @@
 package br.com.fullstackAngularSpring.rest.response;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PessoaResponse {
 	
@@ -13,6 +14,8 @@ public class PessoaResponse {
 	private String rg;
 
 	private LocalDate dataNascimento;
+	
+	List<EnderecoResponse> enderecos;
 
 	public Long getId() {
 		return id;
@@ -52,5 +55,13 @@ public class PessoaResponse {
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public List<EnderecoResponse> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<EnderecoResponse> enderecos) {
+		this.enderecos = enderecos;
 	}
 }

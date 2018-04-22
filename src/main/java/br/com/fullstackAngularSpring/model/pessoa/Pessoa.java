@@ -3,6 +3,7 @@ package br.com.fullstackAngularSpring.model.pessoa;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,69 +36,55 @@ public class Pessoa {
 	@Column(name = "data_nasci", nullable = false)
 	private LocalDate dataNascimento;
 
-	
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pessoa")
 	private List<Endereco> enderecos;
-
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getCpf() {
 		return cpf;
 	}
 
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 
 	public String getRg() {
 		return rg;
 	}
 
-
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
 
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
-
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
-
 	
 }

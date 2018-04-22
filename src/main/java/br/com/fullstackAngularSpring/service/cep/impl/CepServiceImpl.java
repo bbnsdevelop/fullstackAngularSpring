@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
-import br.com.fullstackAngularSpring.rest.response.CepEndereco;
+import br.com.fullstackAngularSpring.rest.response.CepEnderecoResponse;
 import br.com.fullstackAngularSpring.service.cep.CepService;
 
 @Service
 public class CepServiceImpl implements CepService{
 //	private static final Logger logger = LogManager.getLogger(CepServiceImpl.class);
 	@Override
-	public CepEndereco getCep(String buscarCep) {
+	public CepEnderecoResponse getCep(String buscarCep) {
 		Gson gson = new Gson();
-		CepEndereco cep = gson.fromJson(getJsonCep(buscarCep), CepEndereco.class);
+		CepEnderecoResponse cep = gson.fromJson(getJsonCep(buscarCep), CepEnderecoResponse.class);
 		return cep;
 	}	
 	private String getJsonCep(String cep) {

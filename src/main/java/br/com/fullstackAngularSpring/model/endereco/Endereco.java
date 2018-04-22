@@ -107,6 +107,12 @@ public class Endereco {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+	public String getFlagEnderecoPrincipal() {
+		return flagEnderecoPrincipal;
+	}
+	public void setFlagEnderecoPrincipal(String flagEnderecoPrincipal) {
+		this.flagEnderecoPrincipal = flagEnderecoPrincipal;
+	}
 	
 	
 	
