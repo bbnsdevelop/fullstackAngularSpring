@@ -17,22 +17,16 @@ import br.com.fullstackAngularSpring.service.info.InformacoesPessoaisService;
 @Service
 public class InformacoesPessoaisServiceImpl implements InformacoesPessoaisService{
 	
+	private List<EnderecoResponse> enderecos; 
 	@Autowired
-	PessoaRepository pessoaRepository;
+	private PessoaRepository pessoaRepository;
 
 	@Override
 	public DadosPessoaisResponse infoAll() {
 		DadosPessoaisResponse info = new DadosPessoaisResponse();
-		List<EnderecoResponse> enderecos = new ArrayList<>();
+		this.enderecos = new ArrayList<>();
 		List<PessoaResponse> pessoas =  new ArrayList<>();
 		pessoaRepository.findAll().stream().forEach(dados ->{
-			PessoaResponseBuilder pessoaBuilderResponse = PessoaResponseBuilder.create()
-					.id(dados.getId())
-					.nome(dados.getNome())
-					.rg(dados.getRg())
-					.cpf(dados.getCpf())
-					.dataNascimento(dados.getDataNascimento());
-			pessoas.add(pessoaBuilderResponse.build());
 			dados.getEnderecos().stream().forEach(end ->{
 				EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
 						.id(end.getCodigo())
@@ -45,13 +39,26 @@ public class InformacoesPessoaisServiceImpl implements InformacoesPessoaisServic
 						.uf(end.getEstado())
 						.pessoaId(end.getPessoa().getId())
 						.enderecoPrincipal(end.getFlagEnderecoPrincipal());
-				enderecos.add(endBuilderResponse.build());				
+				this.enderecos.add(endBuilderResponse.build());				
 			});
+			PessoaResponseBuilder pessoaBuilderResponse = PessoaResponseBuilder.create()
+					.id(dados.getId())
+					.nome(dados.getNome())
+					.rg(dados.getRg())
+					.cpf(dados.getCpf())
+					.dataNascimento(dados.getDataNascimento())
+					.enderecos(enderecos);			
+			pessoas.add(pessoaBuilderResponse.build());
+			this.enderecos = new ArrayList<>();
 		});
-		pessoas.stream().filter(p -> p.getId().equals() )
 		info.setPessoas(pessoas);
-		//info.getPessoas().
 		return info;
+	}
+
+	@Override
+	public PessoaResponse buscaPorCpf(String cpf) {
+		//pessoaRepository
+		return null;
 	}
 
 }
