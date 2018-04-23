@@ -15,7 +15,7 @@ public class PessoaResponse {
 
 	private LocalDate dataNascimento;
 	
-	List<EnderecoResponse> enderecos;
+	private List<EnderecoResponse> enderecos;
 
 	public Long getId() {
 		return id;
