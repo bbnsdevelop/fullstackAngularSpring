@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.fullstackAngularSpring.builders.PessoaEntityBuilder;
 import br.com.fullstackAngularSpring.builders.PessoaResponseBuilder;
+import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
 import br.com.fullstackAngularSpring.repository.pessoa.PessoaRepository;
 import br.com.fullstackAngularSpring.rest.request.PessoaRequest;
 import br.com.fullstackAngularSpring.rest.response.PessoaResponse;
@@ -19,9 +21,20 @@ public class PessoaImpl implements PessoaService{
 	private PessoaRepository pessoaRepository;
 	
 	@Override
-	public PessoaResponse criar(PessoaRequest pessoa) {
-		// TODO Auto-generated method stub
-		return null;
+	public PessoaResponse criar(PessoaRequest request) {
+		PessoaEntityBuilder pessoaBuilder = PessoaEntityBuilder.create()
+				.cpf(request.getCpf())
+				.dataNascimento(request.getDataNascimento())
+				.nome(request.getNome())
+				.rg(request.getRg());
+		Pessoa pessoa = pessoaRepository.save(pessoaBuilder.build());
+		PessoaResponseBuilder pessoaResponseBuilder = PessoaResponseBuilder.create()
+				.id(pessoa.getId())
+				.cpf(pessoa.getCpf())
+				.dataNascimento(pessoa.getDataNascimento())
+				.nome(pessoa.getNome())
+				.rg(pessoa.getRg());
+		return pessoaResponseBuilder.build();
 	}
 
 	@Override
@@ -38,6 +51,5 @@ public class PessoaImpl implements PessoaService{
 		});
 		return pessoas;
 	}
-
 
 }
