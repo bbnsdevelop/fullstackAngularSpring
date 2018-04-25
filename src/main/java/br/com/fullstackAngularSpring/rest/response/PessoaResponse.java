@@ -3,6 +3,9 @@ package br.com.fullstackAngularSpring.rest.response;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PessoaResponse {
 	
 	private Long id;

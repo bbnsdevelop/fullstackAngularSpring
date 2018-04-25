@@ -11,4 +11,6 @@ public interface PessoaService {
 
 	List<PessoaResponse> getAll();
 
+	void delete(Long id);
+
 }

@@ -52,4 +52,9 @@ public class PessoaImpl implements PessoaService{
 		return pessoas;
 	}
 
+	@Override
+	public void delete(Long id) {
+		pessoaRepository.deleteById(id);		
+	}
+
 }

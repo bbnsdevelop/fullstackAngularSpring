@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +29,6 @@ public class PessoaController implements PessoaResource{
 	@Override
 	@PostMapping
 	public ResponseEntity<?> cadastroPessoa(@Validated @RequestBody PessoaRequest pessoa) {
-		
 		return ResponseEntity.status(HttpStatus.OK).body(pessoaService.criar(pessoa));
 	}
 
@@ -38,9 +39,10 @@ public class PessoaController implements PessoaResource{
 	}
 
 	@Override
-	public ResponseEntity<?> deletaPessoa() {
-		// TODO Auto-generated method stub
-		return null;
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deletaPessoa(@PathVariable Long id) {
+		pessoaService.delete(id);
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 	@Override
