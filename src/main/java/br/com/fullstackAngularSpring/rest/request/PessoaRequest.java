@@ -6,6 +6,8 @@ import javax.validation.constraints.NotNull;
 
 public class PessoaRequest {
 	
+	private Long id;
+	
 	@NotNull(message = "nome da pessoa não pode ser null")
 	private String nome;
 	
@@ -48,6 +50,14 @@ public class PessoaRequest {
 
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	

@@ -8,6 +8,8 @@ import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
 
 public class PessoaEntityBuilder {
 	
+	private Long id;
+	
 	private String nome;
 	
 	private String cpf;
@@ -20,6 +22,10 @@ public class PessoaEntityBuilder {
 		return new PessoaEntityBuilder();
 	}
 	
+	public PessoaEntityBuilder id(Long id) {
+		this.id = id;
+		return this;
+	}
 	public PessoaEntityBuilder nome(String nome) {
 		this.nome = nome;
 		return this;
@@ -42,7 +48,8 @@ public class PessoaEntityBuilder {
 	}
 	
 	public Pessoa build() {
-		Pessoa pessoa = new Pessoa();		
+		Pessoa pessoa = new Pessoa();
+		pessoa.setId(id);
 		pessoa.setNome(nome);
 		pessoa.setRg(rg);
 		pessoa.setCpf(cpf);
