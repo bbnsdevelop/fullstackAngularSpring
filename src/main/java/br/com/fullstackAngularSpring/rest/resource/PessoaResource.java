@@ -8,6 +8,7 @@ public interface PessoaResource {
 	
 	ResponseEntity<?> cadastroPessoa(PessoaRequest pessoa);
 	ResponseEntity<?> atualizaPessoa(PessoaRequest request);
+	ResponseEntity<?> atualizaPessoa(Long id, PessoaRequest request);
 	ResponseEntity<?> deletaPessoa(Long id);
 	ResponseEntity<?> buscaTodasPessoas();
 	ResponseEntity<?> buscaPessoaId(Long id);

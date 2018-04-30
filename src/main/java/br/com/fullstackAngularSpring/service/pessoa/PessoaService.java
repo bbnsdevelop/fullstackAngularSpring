@@ -17,4 +17,6 @@ public interface PessoaService {
 
 	PessoaResponse buscaPorId(Long id);
 
+	PessoaResponse upDatePessoa(Long id, PessoaRequest request);
+
 }

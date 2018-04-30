@@ -2,6 +2,7 @@ package br.com.fullstackAngularSpring.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -49,6 +50,16 @@ public class FullStackExceptionHandler extends ResponseEntityExceptionHandler{
 		return handleExceptionInternal(ex, erros , new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 		
 	}
+	@ExceptionHandler({NoSuchElementException.class})
+	public ResponseEntity<Object> handleEmptyResultDataAccessException (NoSuchElementException ex, WebRequest request ) {
+		String mensagemUsuario = menssageSource.getMessage("mensagem.nao-encontrado", null, LocaleContextHolder.getLocale());
+		String causa = ex.getMessage();
+		List<Error> erros = new ArrayList<>();
+		erros.add(new Error(mensagemUsuario, causa));
+		return handleExceptionInternal(ex, erros , new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+		
+	}
+	
 	
 	private List<Error> criarListaErros(BindingResult bindingResult){
 		List<Error> erros = new ArrayList<>();

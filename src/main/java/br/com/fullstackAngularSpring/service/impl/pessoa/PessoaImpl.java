@@ -5,18 +5,23 @@ import static java.util.Objects.isNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
+import br.com.fullstackAngularSpring.builders.EnderecoEntityBuilder;
+import br.com.fullstackAngularSpring.builders.EnderecoResponseBuilder;
 import br.com.fullstackAngularSpring.builders.PessoaEntityBuilder;
 import br.com.fullstackAngularSpring.builders.PessoaResponseBuilder;
 import br.com.fullstackAngularSpring.exceptions.PessoaException;
 import br.com.fullstackAngularSpring.model.endereco.Endereco;
 import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
+import br.com.fullstackAngularSpring.repository.endereco.EnderecoRepository;
 import br.com.fullstackAngularSpring.repository.pessoa.PessoaRepository;
 import br.com.fullstackAngularSpring.rest.request.PessoaRequest;
+import br.com.fullstackAngularSpring.rest.response.EnderecoResponse;
 import br.com.fullstackAngularSpring.rest.response.PessoaResponse;
 import br.com.fullstackAngularSpring.service.pessoa.PessoaService;
 
@@ -25,12 +30,14 @@ public class PessoaImpl implements PessoaService{
 	
 	private PessoaRepository pessoaRepository;
 	private MessageSource menssageSource;
+	private Pessoa pessoa;
+	private EnderecoRepository enderecoRepository;
 	
 	@Autowired
-	public PessoaImpl(PessoaRepository pessoaRepository, MessageSource menssageSource) {
-		super();
+	public PessoaImpl(PessoaRepository pessoaRepository, MessageSource menssageSource, EnderecoRepository enderecoRepository) {
 		this.pessoaRepository = pessoaRepository;
 		this.menssageSource = menssageSource;
+		this.enderecoRepository = enderecoRepository;
 	}
 	
 	@Override
@@ -47,7 +54,43 @@ public class PessoaImpl implements PessoaService{
 				.dataNascimento(pessoa.getDataNascimento())
 				.nome(pessoa.getNome())
 				.rg(pessoa.getRg());
-		return pessoaResponseBuilder.build();
+		PessoaResponse response = pessoaResponseBuilder.build();
+		List<Endereco> enderecos = new ArrayList<>();
+		if(request.getEnderecos().size() > 0) {
+			request.getEnderecos().stream().forEach(end ->{
+				EnderecoEntityBuilder endBuilder = EnderecoEntityBuilder.create()
+						.bairro(end.getBairro())
+						.cep(end.getCep())
+						.complemento(end.getComplemento())
+						.enderecoPrincipal(end.getEnderecoPrincipal())
+						.id(end.getId())
+						.localidade(end.getLocalidade())
+						.logradouro(end.getLogradouro())
+						.numero(end.getNumero())
+						.pessoa(pessoa)
+						.uf(end.getUf());
+				enderecos.add(endBuilder.build());
+			});		
+			pessoa.setEnderecos(enderecoRepository.saveAll(enderecos));
+		}
+		List<EnderecoResponse> enderecosResponse = new ArrayList<>();
+		pessoa.getEnderecos().stream().forEach(end ->{
+			EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
+					.id(end.getCodigo())
+					.logradouro(end.getLogradouro())
+					.numero(end.getNumero())
+					.complemento(end.getComplemento() != null ? end.getComplemento() : "")
+					.bairro(end.getBairro())
+					.cep(end.getCep())
+					.localidade(end.getCidade())
+					.uf(end.getEstado())
+					.pessoaId(end.getPessoa().getId())
+					.enderecoPrincipal(end.getFlagEnderecoPrincipal());
+			enderecosResponse.add(endBuilderResponse.build());	
+		});
+		response.setEnderecos(enderecosResponse);
+		return response;
+		
 	}
 
 	@Override
@@ -96,20 +139,93 @@ public class PessoaImpl implements PessoaService{
 
 	@Override
 	public PessoaResponse buscaPorId(Long id) {
+		List<EnderecoResponse> enderecos = new ArrayList<>();
 		if(isNull(id)) {
 			throw new PessoaException(menssageSource.getMessage("mensagem.erro-id", null, LocaleContextHolder.getLocale()));
 		}
-		Pessoa pessoa = pessoaRepository.getOne(id);
-		if(isNull(pessoa.getId())) {
-			throw new PessoaException(menssageSource.getMessage("mensagem.erro-pessoa-null", null, LocaleContextHolder.getLocale()));
-		}
+		Pessoa pessoa = pessoaRepository.findById(id).get();
 		PessoaResponseBuilder pessoaResponseBuilder = PessoaResponseBuilder.create()
 				.id(pessoa.getId())
 				.cpf(pessoa.getCpf())
 				.dataNascimento(pessoa.getDataNascimento())
 				.nome(pessoa.getNome())
 				.rg(pessoa.getRg());
-		return pessoaResponseBuilder.build();
+		PessoaResponse response = pessoaResponseBuilder.build();
+		pessoa.getEnderecos().stream().forEach(end ->{
+			EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
+					.id(end.getCodigo())
+					.logradouro(end.getLogradouro())
+					.numero(end.getNumero())
+					.complemento(end.getComplemento() != null ? end.getComplemento() : "")
+					.bairro(end.getBairro())
+					.cep(end.getCep())
+					.localidade(end.getCidade())
+					.uf(end.getEstado())
+					.pessoaId(end.getPessoa().getId())
+					.enderecoPrincipal(end.getFlagEnderecoPrincipal());
+			enderecos.add(endBuilderResponse.build());	
+		});
+		response.setEnderecos(enderecos);
+		return response;
+	}
+
+	@Override
+	public PessoaResponse upDatePessoa(Long id, PessoaRequest request) {
+		this.pessoa = new Pessoa();
+		if(isNull(id)) {
+			throw new PessoaException(menssageSource.getMessage("mensagem.erro-update-id", null, LocaleContextHolder.getLocale()));
+		}
+		PessoaEntityBuilder pessoaBuilder = PessoaEntityBuilder.create()
+				.id(request.getId())
+				.cpf(request.getCpf())
+				.dataNascimento(request.getDataNascimento())
+				.nome(request.getNome())
+				.rg(request.getRg());
+		this.pessoa = pessoaBuilder.build();
+		this.pessoa.setId(id);
+		List<Endereco> enderecos = new ArrayList<>();
+		request.getEnderecos().stream().forEach(end ->{
+			EnderecoEntityBuilder endBuilder = EnderecoEntityBuilder.create()
+					.bairro(end.getBairro())
+					.cep(end.getCep())
+					.complemento(end.getComplemento())
+					.enderecoPrincipal(end.getEnderecoPrincipal())
+					.id(end.getId())
+					.localidade(end.getLocalidade())
+					.logradouro(end.getLogradouro())
+					.numero(end.getNumero())
+					.pessoa(this.pessoa)
+					.uf(end.getUf());
+			enderecos.add(endBuilder.build());
+		});
+		this.pessoa.setEnderecos(enderecos);		
+		Pessoa pessoaSalva = pessoaRepository.findById(id).get();
+		BeanUtils.copyProperties(this.pessoa, pessoaSalva);
+		Pessoa pessoa = pessoaRepository.save(pessoaSalva);
+		List<EnderecoResponse> listaEnderecos = new ArrayList<>();
+		PessoaResponseBuilder pessoaResponseBuilder = PessoaResponseBuilder.create()
+				.id(pessoa.getId())
+				.cpf(pessoa.getCpf())
+				.dataNascimento(pessoa.getDataNascimento())
+				.nome(pessoa.getNome())
+				.rg(pessoa.getRg());
+		PessoaResponse response = pessoaResponseBuilder.build();
+		pessoa.getEnderecos().stream().forEach(end ->{
+			EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
+					.id(end.getCodigo())
+					.logradouro(end.getLogradouro())
+					.numero(end.getNumero())
+					.complemento(end.getComplemento() != null ? end.getComplemento() : "")
+					.bairro(end.getBairro())
+					.cep(end.getCep())
+					.localidade(end.getCidade())
+					.uf(end.getEstado())
+					.pessoaId(end.getPessoa().getId())
+					.enderecoPrincipal(end.getFlagEnderecoPrincipal());
+			listaEnderecos.add(endBuilderResponse.build());	
+		});
+		response.setEnderecos(listaEnderecos);
+		return response;
 	}
 
 }

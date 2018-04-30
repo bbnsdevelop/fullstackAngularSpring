@@ -1,6 +1,7 @@
 package br.com.fullstackAngularSpring.rest.request;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -19,6 +20,8 @@ public class PessoaRequest {
 
 	@NotNull(message = "dataNascimento da pessoa não pode ser null")
 	private LocalDate dataNascimento;
+	
+	private List<EnderecoRequest> enderecos;
 
 	public String getCpf() {
 		return cpf;
@@ -58,6 +61,14 @@ public class PessoaRequest {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<EnderecoRequest> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<EnderecoRequest> enderecos) {
+		this.enderecos = enderecos;
 	}
 	
 	

@@ -2,6 +2,8 @@ package br.com.fullstackAngularSpring.rest.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,7 @@ public class PessoaController implements PessoaResource{
 
 	@Override
 	@PutMapping()
-	public ResponseEntity<?> atualizaPessoa(@Validated @RequestBody PessoaRequest request) {
+	public ResponseEntity<?> atualizaPessoa(@Valid @RequestBody PessoaRequest request) {
 		return ResponseEntity.status(HttpStatus.OK).body(pessoaService.upDatePessoa(request));
 	}
 
@@ -56,6 +58,12 @@ public class PessoaController implements PessoaResource{
 	@GetMapping("/{id}")
 	public ResponseEntity<?> buscaPessoaId(@PathVariable Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(pessoaService.buscaPorId(id));
+	}
+
+	@Override
+	@PutMapping("/{id}")
+	public ResponseEntity<?> atualizaPessoa(@PathVariable("id") Long id, @Valid @RequestBody PessoaRequest request) {
+		return ResponseEntity.status(HttpStatus.OK).body(pessoaService.upDatePessoa(id, request));
 	}
 	
 }

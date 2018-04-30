@@ -1,9 +1,7 @@
 package br.com.fullstackAngularSpring.builders;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import br.com.fullstackAngularSpring.model.endereco.Endereco;
 import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
 
 public class PessoaEntityBuilder {
