@@ -36,7 +36,7 @@ public class Pessoa {
 	@Column(name = "data_nasci", nullable = false)
 	private LocalDate dataNascimento;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pessoa")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pessoa")
 	private List<Endereco> enderecos;
 
 	public Long getId() {

@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.model;
+package br.com.fullstackAngularSpring.model.lancamento;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

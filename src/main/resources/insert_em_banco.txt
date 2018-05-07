@@ -1,0 +1,17 @@
+INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('João Silva', '025.099.546-89', '58.198.247-99', '1981/05/15');
+INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Bruno Batista', '038.023.235-99', '59.198.247-89', '1988/05/15');
+INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Jonatas Pereira', '025.079.546-89', '57.138.247-99', '1983/05/15');
+INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Marcos Silva', '035.099.546-89', '55.198.247-91', '1984/05/15');
+INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Maria Santos', '045.099.546-89', '54.198.247-92', '1985/05/15');
+INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Tacy Bezerra', '055.099.546-89', '53.198.247-93', '1986/05/15');
+INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Raimunda Silva', '065.099.546-89', '52.198.247-94', '1987/05/15');
+INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Ester Silva', '075.099.546-89', '51.198.247-95', '1980/05/15');
+
+
+INSERT INTO TB_LANCAMENTO (DESCRICAO, DATA_VENCI, DATA_PAGTO, VALOR, OBSERVACAO, TIPO, ID_CATEGORIA, ID_PESSOA) VALUES ('Salário mensal','2017-06-10',null,6500.00,'Descrição de lucros','RECEITA',1,12);
+INSERT INTO TB_LANCAMENTO (DESCRICAO, DATA_VENCI, DATA_PAGTO, VALOR, OBSERVACAO, TIPO, ID_CATEGORIA, ID_PESSOA) VALUES ('Café','2017-06-12',null,6500.00, 'Descrição de lucros','RECEITA',1,12);
+INSERT INTO TB_LANCAMENTO (DESCRICAO, DATA_VENCI, DATA_PAGTO, VALOR, OBSERVACAO, TIPO, ID_CATEGORIA, ID_PESSOA) VALUES ('Bolinho de chuva','2017-06-15',null,5500.00, 'Descrição de lucros','DESPESA',1,13);
+INSERT INTO TB_LANCAMENTO (DESCRICAO, DATA_VENCI, DATA_PAGTO, VALOR, OBSERVACAO, TIPO, ID_CATEGORIA, ID_PESSOA) VALUES ('Pnus','2017-06-19',null,4500.00, 'Descrição de lucros','RECEITA',2,14);
+INSERT INTO TB_LANCAMENTO (DESCRICAO, DATA_VENCI, DATA_PAGTO, VALOR, OBSERVACAO, TIPO, ID_CATEGORIA, ID_PESSOA) VALUES ('Churrasco','2017-06-14',null,3500.00, 'Descrição de lucros','DESPESA',3,15);
+INSERT INTO TB_LANCAMENTO (DESCRICAO, DATA_VENCI, DATA_PAGTO, VALOR, OBSERVACAO, TIPO, ID_CATEGORIA, ID_PESSOA) VALUES ('Lanche','2017-06-18',null,2500.00, 'Descrição de lucros','DESPESA',4,16);
+INSERT INTO TB_LANCAMENTO (DESCRICAO, DATA_VENCI, DATA_PAGTO, VALOR, OBSERVACAO, TIPO, ID_CATEGORIA, ID_PESSOA) VALUES ('Doces','2017-06-17',null,1500.00, 'Descrição de lucros','RECEITA',5,17);
