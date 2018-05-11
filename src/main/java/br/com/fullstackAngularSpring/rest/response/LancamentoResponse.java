@@ -1,9 +1,9 @@
-package br.com.fullstackAngularSpring.rest.request;
+package br.com.fullstackAngularSpring.rest.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class LancamentoRequest {
+public class LancamentoResponse {
 	
 	private Long catelogoriaId;
 	private String descricao;
@@ -13,8 +13,6 @@ public class LancamentoRequest {
 	private String observacao;
 	private String tipo;
 	private Long pessoaId;
-	
-	
 	public Long getCatelogoriaId() {
 		return catelogoriaId;
 	}
@@ -63,5 +61,6 @@ public class LancamentoRequest {
 	public void setPessoaId(Long pessoaId) {
 		this.pessoaId = pessoaId;
 	}
-
+	
+	
 }

@@ -41,4 +41,10 @@ public class LancamentoController implements LancamentoResource{
 		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoService.saveLancamento(id, request));
 	}
 
+	@Override
+	public ResponseEntity<?> salvarLancamento(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
