@@ -32,19 +32,14 @@ public class LancamentoController implements LancamentoResource{
 	@Override
 	@GetMapping()
 	public ResponseEntity<?> buscaLancamentos() {
-		return ResponseEntity.status(HttpStatus.OK).body(lancamentoService.findByPessoa(id));
+		return ResponseEntity.status(HttpStatus.OK).body(lancamentoService.findAll());
 	}
 
 	@Override
-	@PostMapping("/{id}")
-	public ResponseEntity<?> salvarLancamento(@Valid @RequestBody LancamentoRequest request, @PathVariable("id") Long id) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoService.saveLancamento(id, request));
+	@PostMapping("pessoa/{pessoaId}/categoria/{catId}")
+	public ResponseEntity<?> salvarLancamento(@Valid @RequestBody LancamentoRequest request, @PathVariable("pessoaId") Long pessoaId, @PathVariable("catId") Long catId) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoService.saveLancamento(pessoaId, catId, request));
 	}
 
-	@Override
-	public ResponseEntity<?> salvarLancamento(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

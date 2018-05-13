@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 public class LancamentoResponse {
 	
+	private Long id;
 	private Long catelogoriaId;
 	private String descricao;
 	private LocalDate dataVencimento;
@@ -13,6 +14,14 @@ public class LancamentoResponse {
 	private String observacao;
 	private String tipo;
 	private Long pessoaId;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public Long getCatelogoriaId() {
 		return catelogoriaId;
 	}
@@ -61,6 +70,5 @@ public class LancamentoResponse {
 	public void setPessoaId(Long pessoaId) {
 		this.pessoaId = pessoaId;
 	}
-	
 	
 }

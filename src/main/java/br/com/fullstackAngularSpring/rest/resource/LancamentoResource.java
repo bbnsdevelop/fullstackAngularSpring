@@ -7,7 +7,7 @@ import br.com.fullstackAngularSpring.rest.request.LancamentoRequest;
 public interface LancamentoResource {
 	ResponseEntity<?> buscaLancamentoPorPessoa(Long id);
 	ResponseEntity<?> buscaLancamentos();
-	ResponseEntity<?> salvarLancamento(LancamentoRequest request, Long id);
+	ResponseEntity<?> salvarLancamento(LancamentoRequest request, Long id, Long catId);
 	
 
 }
