@@ -1,18 +1,39 @@
-package br.com.fullstackAngularSpring.rest.response;
+package br.com.fullstackAngularSpring.rest.dataTransferObject;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class LancamentoResponse {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class LancamentoDto {
 	
 	private Long id;
-	private Long catelogoriaId;
+	
+	@NotNull(message = "descricao não pode ser null")
+	@Size(min = 3, max = 50)
 	private String descricao;
+	
+	@NotNull(message = "descricao não pode ser null")
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private LocalDate dataVencimento;
+	
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	private LocalDate dataPagamento;
+	
 	private BigDecimal valor;
+	
 	private String observacao;
+	
+	@NotNull(message = "tipo não pode ser null")
 	private String tipo;
+
+	@NotNull(message = "catelogoriaId não pode ser null")
+	private Long catelogoriaId;
+
+	@NotNull(message = "pessoaId não pode ser null")
 	private Long pessoaId;
 	
 	public Long getId() {
@@ -21,7 +42,6 @@ public class LancamentoResponse {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	public Long getCatelogoriaId() {
 		return catelogoriaId;
 	}
@@ -70,5 +90,6 @@ public class LancamentoResponse {
 	public void setPessoaId(Long pessoaId) {
 		this.pessoaId = pessoaId;
 	}
+	
 	
 }

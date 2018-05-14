@@ -23,11 +23,11 @@ import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
 public class Lancamento {
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "ID", length=50)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "DESCRICAO", nullable = false)
+	@Column(name = "DESCRICAO", nullable = false, length=50)
 	private String descricao;
 	
 	@Column(name = "DATA_VENCI", nullable = false)
@@ -39,19 +39,19 @@ public class Lancamento {
 	@Column(name = "VALOR")
 	private BigDecimal valor;
 	
-	@Column(name = "OBSERVACAO")
+	@Column(name = "OBSERVACAO", length=200)
 	private String observacao;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "TIPO")
+	@Column(name = "TIPO", length=20)
 	private TipoLancamento tipo;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_CATEGORIA")
+	@JoinColumn(name = "ID_CATEGORIA", nullable = false)
 	private Categoria categoria;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_PESSOA")
+	@JoinColumn(name = "ID_PESSOA", nullable = false)
 	private Pessoa pessoa;
 
 	public Long getId() {

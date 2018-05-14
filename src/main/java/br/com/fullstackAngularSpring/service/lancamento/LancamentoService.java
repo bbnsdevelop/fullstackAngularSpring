@@ -2,15 +2,14 @@ package br.com.fullstackAngularSpring.service.lancamento;
 
 import java.util.List;
 
-import br.com.fullstackAngularSpring.rest.request.LancamentoRequest;
-import br.com.fullstackAngularSpring.rest.response.LancamentoResponse;
+import br.com.fullstackAngularSpring.rest.dataTransferObject.LancamentoDto;
 
 public interface LancamentoService {
 
-	LancamentoResponse saveLancamento(Long pessoaId, Long catId, LancamentoRequest request);
+	LancamentoDto saveLancamento(LancamentoDto request);
 
-	List<LancamentoResponse> findAll();
+	List<LancamentoDto> findAll();
 
-	List<LancamentoResponse> findByPessoa(Long id);
+	List<LancamentoDto> findByPessoa(Long id);
 
 }

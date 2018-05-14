@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fullstackAngularSpring.rest.request.LancamentoRequest;
+import br.com.fullstackAngularSpring.rest.dataTransferObject.LancamentoDto;
 import br.com.fullstackAngularSpring.rest.resource.LancamentoResource;
 import br.com.fullstackAngularSpring.service.lancamento.LancamentoService;
 
@@ -36,9 +36,9 @@ public class LancamentoController implements LancamentoResource{
 	}
 
 	@Override
-	@PostMapping("pessoa/{pessoaId}/categoria/{catId}")
-	public ResponseEntity<?> salvarLancamento(@Valid @RequestBody LancamentoRequest request, @PathVariable("pessoaId") Long pessoaId, @PathVariable("catId") Long catId) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoService.saveLancamento(pessoaId, catId, request));
+	@PostMapping()
+	public ResponseEntity<?> salvarLancamento(@Valid @RequestBody LancamentoDto request) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoService.saveLancamento(request));
 	}
 
 

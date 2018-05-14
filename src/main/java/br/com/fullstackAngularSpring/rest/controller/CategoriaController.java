@@ -37,7 +37,7 @@ public class CategoriaController implements CategoriaResource{
 	}
 	@Override
 	@PostMapping
-	public ResponseEntity<?> setCategoria(@RequestBody @Validated CategoriaRequest requeste, HttpServletResponse response) {
+	public ResponseEntity<?> setCategoria(@RequestBody @Validated CategoriaRequest requeste) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.create(requeste));
 	}
 
