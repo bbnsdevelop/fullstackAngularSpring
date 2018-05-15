@@ -20,6 +20,8 @@ public class PessoaResponseBuilder {
 
 	private LocalDate dataNascimento;
 	
+	private String ativo;
+	
 	public static PessoaResponseBuilder create() {
 		return new PessoaResponseBuilder();
 	}
@@ -53,6 +55,11 @@ public class PessoaResponseBuilder {
 		this.dataNascimento = dataNascimento;
 		return this;
 	}
+	public PessoaResponseBuilder ativo(String ativo) {
+		this.ativo = ativo;
+		return this;
+	}
+	
 	
 	public PessoaResponse build() {
 		PessoaResponse pessoa = new PessoaResponse();
@@ -62,7 +69,8 @@ public class PessoaResponseBuilder {
 		pessoa.setRg(rg);
 		pessoa.setCpf(cpf);
 		pessoa.setEnderecos(enderecos);
-		pessoa.setDataNascimento(dataNascimento);		
+		pessoa.setDataNascimento(dataNascimento);	
+		pessoa.setAtivo(ativo);
 		return pessoa;
 	}
 

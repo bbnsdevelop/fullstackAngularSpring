@@ -15,6 +15,7 @@ import br.com.fullstackAngularSpring.builders.EnderecoEntityBuilder;
 import br.com.fullstackAngularSpring.builders.EnderecoResponseBuilder;
 import br.com.fullstackAngularSpring.builders.PessoaEntityBuilder;
 import br.com.fullstackAngularSpring.builders.PessoaResponseBuilder;
+import br.com.fullstackAngularSpring.enumerator.PessoaEnum;
 import br.com.fullstackAngularSpring.exceptions.PessoaException;
 import br.com.fullstackAngularSpring.model.endereco.Endereco;
 import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
@@ -144,29 +145,32 @@ public class PessoaImpl implements PessoaService{
 			throw new PessoaException(menssageSource.getMessage("mensagem.erro-id", null, LocaleContextHolder.getLocale()));
 		}
 		Pessoa pessoa = pessoaRepository.findById(id).get();
-		PessoaResponseBuilder pessoaResponseBuilder = PessoaResponseBuilder.create()
-				.id(pessoa.getId())
-				.cpf(pessoa.getCpf())
-				.dataNascimento(pessoa.getDataNascimento())
-				.nome(pessoa.getNome())
-				.rg(pessoa.getRg());
-		PessoaResponse response = pessoaResponseBuilder.build();
-		pessoa.getEnderecos().stream().forEach(end ->{
-			EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
-					.id(end.getCodigo())
-					.logradouro(end.getLogradouro())
-					.numero(end.getNumero())
-					.complemento(end.getComplemento() != null ? end.getComplemento() : "")
-					.bairro(end.getBairro())
-					.cep(end.getCep())
-					.localidade(end.getCidade())
-					.uf(end.getEstado())
-					.pessoaId(end.getPessoa().getId())
-					.enderecoPrincipal(end.getFlagEnderecoPrincipal());
-			enderecos.add(endBuilderResponse.build());	
-		});
-		response.setEnderecos(enderecos);
-		return response;
+		if(pessoa.getFlagAtivo().equals(PessoaEnum.ATIVO.getValor())) {
+			PessoaResponseBuilder pessoaResponseBuilder = PessoaResponseBuilder.create()
+					.id(pessoa.getId())
+					.cpf(pessoa.getCpf())
+					.dataNascimento(pessoa.getDataNascimento())
+					.nome(pessoa.getNome())
+					.rg(pessoa.getRg());
+			PessoaResponse response = pessoaResponseBuilder.build();
+			pessoa.getEnderecos().stream().forEach(end ->{
+				EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
+						.id(end.getCodigo())
+						.logradouro(end.getLogradouro())
+						.numero(end.getNumero())
+						.complemento(end.getComplemento() != null ? end.getComplemento() : "")
+						.bairro(end.getBairro())
+						.cep(end.getCep())
+						.localidade(end.getCidade())
+						.uf(end.getEstado())
+						.pessoaId(end.getPessoa().getId())
+						.enderecoPrincipal(end.getFlagEnderecoPrincipal());
+				enderecos.add(endBuilderResponse.build());	
+			});
+			response.setEnderecos(enderecos);
+			return response;
+		}
+		return null;
 	}
 
 	@Override
@@ -180,52 +184,62 @@ public class PessoaImpl implements PessoaService{
 				.cpf(request.getCpf())
 				.dataNascimento(request.getDataNascimento())
 				.nome(request.getNome())
-				.rg(request.getRg());
+				.rg(request.getRg())
+				.ativo(request.getAtivo());
 		this.pessoa = pessoaBuilder.build();
 		this.pessoa.setId(id);
-		List<Endereco> enderecos = new ArrayList<>();
-		request.getEnderecos().stream().forEach(end ->{
-			EnderecoEntityBuilder endBuilder = EnderecoEntityBuilder.create()
-					.bairro(end.getBairro())
-					.cep(end.getCep())
-					.complemento(end.getComplemento())
-					.enderecoPrincipal(end.getEnderecoPrincipal())
-					.id(end.getId())
-					.localidade(end.getLocalidade())
-					.logradouro(end.getLogradouro())
-					.numero(end.getNumero())
-					.pessoa(this.pessoa)
-					.uf(end.getUf());
-			enderecos.add(endBuilder.build());
-		});
-		this.pessoa.setEnderecos(enderecos);		
+		if(null != request.getEnderecos()) {
+			List<Endereco> enderecos = new ArrayList<>();
+			request.getEnderecos().stream().forEach(end ->{
+				EnderecoEntityBuilder endBuilder = EnderecoEntityBuilder.create()
+						.bairro(end.getBairro())
+						.cep(end.getCep())
+						.complemento(end.getComplemento())
+						.enderecoPrincipal(end.getEnderecoPrincipal())
+						.id(end.getId())
+						.localidade(end.getLocalidade())
+						.logradouro(end.getLogradouro())
+						.numero(end.getNumero())
+						.pessoa(this.pessoa)
+						.uf(end.getUf());
+				enderecos.add(enderecoRepository.save(endBuilder.build()));
+			});
+			this.pessoa.setEnderecos(enderecos);		
+		}		
 		Pessoa pessoaSalva = pessoaRepository.findById(id).get();
+		if(null == this.pessoa.getEnderecos()) {
+			this.pessoa.setEnderecos(pessoaSalva.getEnderecos());
+		}		
 		BeanUtils.copyProperties(this.pessoa, pessoaSalva);
 		Pessoa pessoa = pessoaRepository.save(pessoaSalva);
-		List<EnderecoResponse> listaEnderecos = new ArrayList<>();
-		PessoaResponseBuilder pessoaResponseBuilder = PessoaResponseBuilder.create()
-				.id(pessoa.getId())
-				.cpf(pessoa.getCpf())
-				.dataNascimento(pessoa.getDataNascimento())
-				.nome(pessoa.getNome())
-				.rg(pessoa.getRg());
-		PessoaResponse response = pessoaResponseBuilder.build();
-		pessoa.getEnderecos().stream().forEach(end ->{
-			EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
-					.id(end.getCodigo())
-					.logradouro(end.getLogradouro())
-					.numero(end.getNumero())
-					.complemento(end.getComplemento() != null ? end.getComplemento() : "")
-					.bairro(end.getBairro())
-					.cep(end.getCep())
-					.localidade(end.getCidade())
-					.uf(end.getEstado())
-					.pessoaId(end.getPessoa().getId())
-					.enderecoPrincipal(end.getFlagEnderecoPrincipal());
-			listaEnderecos.add(endBuilderResponse.build());	
-		});
-		response.setEnderecos(listaEnderecos);
-		return response;
+		if(pessoa.getFlagAtivo().equals(PessoaEnum.ATIVO.getValor())) {
+			List<EnderecoResponse> listaEnderecos = new ArrayList<>();
+			PessoaResponseBuilder pessoaResponseBuilder = PessoaResponseBuilder.create()
+					.id(pessoa.getId())
+					.cpf(pessoa.getCpf())
+					.dataNascimento(pessoa.getDataNascimento())
+					.nome(pessoa.getNome())
+					.rg(pessoa.getRg())
+					.ativo(pessoa.getFlagAtivo());
+			PessoaResponse response = pessoaResponseBuilder.build();
+			pessoa.getEnderecos().stream().forEach(end ->{
+				EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
+						.id(end.getCodigo())
+						.logradouro(end.getLogradouro())
+						.numero(end.getNumero())
+						.complemento(end.getComplemento() != null ? end.getComplemento() : "")
+						.bairro(end.getBairro())
+						.cep(end.getCep())
+						.localidade(end.getCidade())
+						.uf(end.getEstado())
+						.pessoaId(end.getPessoa().getId())
+						.enderecoPrincipal(end.getFlagEnderecoPrincipal());
+				listaEnderecos.add(endBuilderResponse.build());	
+			});
+			response.setEnderecos(listaEnderecos);
+			return response;			
+		}
+		return null;
 	}
 
 }

@@ -62,7 +62,7 @@ public class PessoaController implements PessoaResource{
 
 	@Override
 	@PutMapping("/{id}")
-	public ResponseEntity<?> atualizaPessoa(@PathVariable("id") Long id, @Valid @RequestBody PessoaRequest request) {
+	public ResponseEntity<?> ativaDesativaPessoa(@PathVariable("id") Long id, @Valid @RequestBody PessoaRequest request) {
 		return ResponseEntity.status(HttpStatus.OK).body(pessoaService.upDatePessoa(id, request));
 	}
 	

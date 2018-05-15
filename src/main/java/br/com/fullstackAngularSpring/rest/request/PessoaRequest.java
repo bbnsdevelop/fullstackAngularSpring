@@ -21,6 +21,9 @@ public class PessoaRequest {
 	@NotNull(message = "dataNascimento da pessoa não pode ser null")
 	private LocalDate dataNascimento;
 	
+	@NotNull(message = "ativo da pessoa não pode ser null")
+	private String ativo;
+	
 	private List<EnderecoRequest> enderecos;
 
 	public String getCpf() {
@@ -69,6 +72,14 @@ public class PessoaRequest {
 
 	public void setEnderecos(List<EnderecoRequest> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public String getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
 	}
 	
 	

@@ -16,6 +16,8 @@ public class PessoaEntityBuilder {
 	
 	private LocalDate dataNascimento;
 	
+	private String ativo;
+	
 	public static PessoaEntityBuilder create() {
 		return new PessoaEntityBuilder();
 	}
@@ -44,6 +46,11 @@ public class PessoaEntityBuilder {
 		this.dataNascimento = dataNascimento;
 		return this;
 	}
+	public PessoaEntityBuilder ativo(String ativo) {
+		this.ativo = ativo;
+		return this;
+	}
+	
 	
 	public Pessoa build() {
 		Pessoa pessoa = new Pessoa();
@@ -51,7 +58,8 @@ public class PessoaEntityBuilder {
 		pessoa.setNome(nome);
 		pessoa.setRg(rg);
 		pessoa.setCpf(cpf);
-		pessoa.setDataNascimento(dataNascimento);		
+		pessoa.setDataNascimento(dataNascimento);
+		pessoa.setFlagAtivo(ativo);
 		return pessoa;
 	}
 }

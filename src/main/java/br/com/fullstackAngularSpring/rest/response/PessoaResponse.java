@@ -19,6 +19,8 @@ public class PessoaResponse {
 	private LocalDate dataNascimento;
 	
 	private List<EnderecoResponse> enderecos;
+	
+	private String ativo;
 
 	public Long getId() {
 		return id;
@@ -67,4 +69,13 @@ public class PessoaResponse {
 	public void setEnderecos(List<EnderecoResponse> enderecos) {
 		this.enderecos = enderecos;
 	}
+
+	public String getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
+	}
+
 }
