@@ -6,4 +6,5 @@ import br.com.fullstackAngularSpring.rest.response.DadosPessoaisResponse;
 
 public interface BuscaInformacoesPessoaisResourse {
 	ResponseEntity<DadosPessoaisResponse> buscaInformacoes();
+	ResponseEntity<?> buscaInformacoesPorCpf(String cpf);
 }

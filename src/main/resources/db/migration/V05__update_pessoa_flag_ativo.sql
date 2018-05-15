@@ -1,0 +1,1 @@
+ALTER TABLE pessoa ADD flag_ativo VARCHAR(1) NOT NULL;

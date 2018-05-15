@@ -30,12 +30,4 @@ ALTER TABLE pessoa DROP COLUMN cidade;
 ALTER TABLE pessoa DROP COLUMN estado;
 
 
-INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('João Silva', '025.099.546-89', '58.198.247-99', '1981/05/15');
-INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Bruno Batista', '038.023.235-99', '59.198.247-89', '1988/05/15');
-INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Jonatas Pereira', '025.079.546-89', '57.138.247-99', '1983/05/15');
-INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Marcos Silva', '035.099.546-89', '55.198.247-91', '1984/05/15');
-INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Maria Santos', '045.099.546-89', '54.198.247-92', '1985/05/15');
-INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Tacy Bezerra', '055.099.546-89', '53.198.247-93', '1986/05/15');
-INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Raimunda Silva', '065.099.546-89', '52.198.247-94', '1987/05/15');
-INSERT INTO pessoa (nome, cpf, rg, data_nasci) values ('Ester Silva', '075.099.546-89', '51.198.247-95', '1980/05/15');
 

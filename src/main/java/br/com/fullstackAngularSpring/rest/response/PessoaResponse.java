@@ -3,6 +3,9 @@ package br.com.fullstackAngularSpring.rest.response;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PessoaResponse {
 	
 	private Long id;
@@ -15,7 +18,9 @@ public class PessoaResponse {
 
 	private LocalDate dataNascimento;
 	
-	List<EnderecoResponse> enderecos;
+	private List<EnderecoResponse> enderecos;
+	
+	private String ativo;
 
 	public Long getId() {
 		return id;
@@ -64,4 +69,13 @@ public class PessoaResponse {
 	public void setEnderecos(List<EnderecoResponse> enderecos) {
 		this.enderecos = enderecos;
 	}
+
+	public String getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
+	}
+
 }

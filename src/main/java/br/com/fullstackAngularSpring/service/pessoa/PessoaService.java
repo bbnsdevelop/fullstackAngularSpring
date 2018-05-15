@@ -11,4 +11,12 @@ public interface PessoaService {
 
 	List<PessoaResponse> getAll();
 
+	void delete(Long id);
+
+	PessoaResponse upDatePessoa(PessoaRequest request);
+
+	PessoaResponse buscaPorId(Long id);
+
+	PessoaResponse upDatePessoa(Long id, PessoaRequest request);
+
 }

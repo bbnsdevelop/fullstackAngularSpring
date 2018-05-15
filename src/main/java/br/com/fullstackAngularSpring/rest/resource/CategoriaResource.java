@@ -10,6 +10,6 @@ public interface CategoriaResource {
 	
 	ResponseEntity<?> getAllCategoria();
 	ResponseEntity<?> getByCategoria(Long id);
-	ResponseEntity<?> setCategoria(CategoriaRequest requeste, HttpServletResponse response);
+	ResponseEntity<?> setCategoria(CategoriaRequest requeste);
 	
 }

@@ -1,7 +1,9 @@
 package br.com.fullstackAngularSpring.builders;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import br.com.fullstackAngularSpring.rest.response.EnderecoResponse;
 import br.com.fullstackAngularSpring.rest.response.PessoaResponse;
 
 public class PessoaResponseBuilder {
@@ -13,8 +15,12 @@ public class PessoaResponseBuilder {
 	private String cpf;
 	
 	private String rg;
+	
+	private List<EnderecoResponse> enderecos;
 
 	private LocalDate dataNascimento;
+	
+	private String ativo;
 	
 	public static PessoaResponseBuilder create() {
 		return new PessoaResponseBuilder();
@@ -40,18 +46,31 @@ public class PessoaResponseBuilder {
 		return this;
 	}
 	
+	public PessoaResponseBuilder enderecos(List<EnderecoResponse> enderecos) {
+		this.enderecos = enderecos;
+		return this;
+	}
+	
 	public PessoaResponseBuilder dataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 		return this;
 	}
+	public PessoaResponseBuilder ativo(String ativo) {
+		this.ativo = ativo;
+		return this;
+	}
+	
 	
 	public PessoaResponse build() {
 		PessoaResponse pessoa = new PessoaResponse();
+		
 		pessoa.setId(id);
 		pessoa.setNome(nome);
 		pessoa.setRg(rg);
 		pessoa.setCpf(cpf);
-		pessoa.setDataNascimento(dataNascimento);		
+		pessoa.setEnderecos(enderecos);
+		pessoa.setDataNascimento(dataNascimento);	
+		pessoa.setAtivo(ativo);
 		return pessoa;
 	}
 

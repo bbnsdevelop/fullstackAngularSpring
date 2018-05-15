@@ -36,8 +36,11 @@ public class Pessoa {
 	@Column(name = "data_nasci", nullable = false)
 	private LocalDate dataNascimento;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pessoa")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pessoa")
 	private List<Endereco> enderecos;
+	
+	@Column(name = "flag_ativo", nullable = false)
+	private String flagAtivo;
 
 	public Long getId() {
 		return id;
@@ -85,6 +88,14 @@ public class Pessoa {
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public String getFlagAtivo() {
+		return flagAtivo;
+	}
+
+	public void setFlagAtivo(String flagAtivo) {
+		this.flagAtivo = flagAtivo;
 	}
 	
 }
