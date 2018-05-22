@@ -57,4 +57,9 @@ public class LancamentoServiceImpl implements LancamentoService {
 		return listaDto;
 	}
 
+	@Override
+	public void deleteLancamentoId(Long id) {
+		lacamentoRepository.deleteById(id);		
+	}
+
 }

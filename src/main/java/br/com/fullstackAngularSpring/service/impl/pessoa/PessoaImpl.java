@@ -103,7 +103,8 @@ public class PessoaImpl implements PessoaService{
 			.nome(p.getNome())
 			.cpf(p.getCpf())
 			.dataNascimento(p.getDataNascimento())
-			.rg(p.getRg());
+			.rg(p.getRg())
+			.ativo(p.getFlagAtivo());
 			pessoas.add(builder.build());
 		});
 		return pessoas;
@@ -125,7 +126,8 @@ public class PessoaImpl implements PessoaService{
 				.cpf(request.getCpf())
 				.dataNascimento(request.getDataNascimento())
 				.nome(request.getNome())
-				.rg(request.getRg());
+				.rg(request.getRg())
+				.ativo(request.getAtivo());
 		Pessoa pessoa = pessoaBuilder.build();
 		pessoa.setEnderecos(enderecos);
 		pessoa = pessoaRepository.save(pessoa);
@@ -134,7 +136,8 @@ public class PessoaImpl implements PessoaService{
 				.cpf(pessoa.getCpf())
 				.dataNascimento(pessoa.getDataNascimento())
 				.nome(pessoa.getNome())
-				.rg(pessoa.getRg());
+				.rg(pessoa.getRg())
+				.ativo(pessoa.getFlagAtivo());
 		return pessoaResponseBuilder.build();
 	}
 

@@ -12,4 +12,6 @@ public interface LancamentoService {
 
 	List<LancamentoDto> findByPessoa(Long id);
 
+	void deleteLancamentoId(Long id);
+
 }

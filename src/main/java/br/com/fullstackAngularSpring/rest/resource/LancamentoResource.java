@@ -6,6 +6,7 @@ import br.com.fullstackAngularSpring.rest.dataTransferObject.LancamentoDto;
 
 public interface LancamentoResource {
 	ResponseEntity<?> buscaLancamentoPorPessoa(Long id);
+	ResponseEntity<?> deletarLancamento(Long id);
 	ResponseEntity<?> buscaLancamentos();
 	ResponseEntity<?> salvarLancamento(LancamentoDto request);
 	
