@@ -1,6 +1,9 @@
-package br.com.fullstackAngularSpring.model.categoria;
+package br.com.fullstackAngularSpring.model;
 
-
+/**
+ * @author Bruno Batista
+ *
+ */
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

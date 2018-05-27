@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.service.categoria;
+package br.com.fullstackAngularSpring.service;
 
 import br.com.fullstackAngularSpring.rest.request.CategoriaRequest;
 import br.com.fullstackAngularSpring.rest.response.CategoriaResponse;

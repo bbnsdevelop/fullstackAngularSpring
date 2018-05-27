@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fullstackAngularSpring.cep.CepService;
 import br.com.fullstackAngularSpring.rest.resource.EnderecoResource;
-import br.com.fullstackAngularSpring.service.cep.CepService;
 
 @RestController
 @RequestMapping("/cep")

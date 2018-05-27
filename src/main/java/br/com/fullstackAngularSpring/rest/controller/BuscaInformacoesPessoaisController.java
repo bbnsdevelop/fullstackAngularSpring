@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fullstackAngularSpring.rest.resource.BuscaInformacoesPessoaisResourse;
 import br.com.fullstackAngularSpring.rest.response.DadosPessoaisResponse;
-import br.com.fullstackAngularSpring.service.info.InformacoesPessoaisService;
+import br.com.fullstackAngularSpring.service.InformacoesPessoaisService;
 
 @RestController
 @RequestMapping("/dados-pessoais")

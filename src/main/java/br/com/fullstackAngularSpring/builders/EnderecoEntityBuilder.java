@@ -1,7 +1,7 @@
 package br.com.fullstackAngularSpring.builders;
 
-import br.com.fullstackAngularSpring.model.endereco.Endereco;
-import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
+import br.com.fullstackAngularSpring.model.Endereco;
+import br.com.fullstackAngularSpring.model.Pessoa;
 
 public class EnderecoEntityBuilder {
 	

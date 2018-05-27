@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.service.pessoa;
+package br.com.fullstackAngularSpring.service;
 
 import java.util.List;
 

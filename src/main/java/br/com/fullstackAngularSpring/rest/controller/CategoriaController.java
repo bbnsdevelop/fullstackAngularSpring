@@ -1,6 +1,5 @@
 package br.com.fullstackAngularSpring.rest.controller;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fullstackAngularSpring.rest.request.CategoriaRequest;
 import br.com.fullstackAngularSpring.rest.resource.CategoriaResource;
-import br.com.fullstackAngularSpring.service.categoria.CategoriaService;
+import br.com.fullstackAngularSpring.service.CategoriaService;
 
 @RestController
 @RequestMapping(value ="/categorias")

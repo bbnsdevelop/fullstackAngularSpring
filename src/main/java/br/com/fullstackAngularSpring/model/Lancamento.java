@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.model.lancamento;
+package br.com.fullstackAngularSpring.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,10 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.fullstackAngularSpring.model.categoria.Categoria;
 import br.com.fullstackAngularSpring.model.enums.TipoLancamento;
-import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
-
+/**
+ * @author Bruno Batista
+ *
+ */
 @Entity
 @Table(name = "TB_LANCAMENTO")
 public class Lancamento {

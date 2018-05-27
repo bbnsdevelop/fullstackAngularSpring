@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import br.com.fullstackAngularSpring.mapper.entityMapper.EntityMapper;
-import br.com.fullstackAngularSpring.model.lancamento.Lancamento;
+import br.com.fullstackAngularSpring.model.Lancamento;
 import br.com.fullstackAngularSpring.rest.dataTransferObject.LancamentoDto;
 
 @Mapper(componentModel = "spring")

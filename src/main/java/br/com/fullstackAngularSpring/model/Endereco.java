@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.model.endereco;
+package br.com.fullstackAngularSpring.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
-
 /**
- * @author codeit18
+ * @author Bruno Batista
  *
  */
 @Entity
@@ -46,7 +44,7 @@ public class Endereco {
 	@Column(name = "estado", nullable = false)
 	private String estado;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 	

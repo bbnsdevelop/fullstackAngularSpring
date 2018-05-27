@@ -2,7 +2,7 @@ package br.com.fullstackAngularSpring.builders;
 
 import java.time.LocalDate;
 
-import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
+import br.com.fullstackAngularSpring.model.Pessoa;
 
 public class PessoaEntityBuilder {
 	

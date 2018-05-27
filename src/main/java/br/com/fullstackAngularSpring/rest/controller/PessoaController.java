@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fullstackAngularSpring.rest.request.PessoaRequest;
 import br.com.fullstackAngularSpring.rest.resource.PessoaResource;
 import br.com.fullstackAngularSpring.rest.response.PessoaResponse;
-import br.com.fullstackAngularSpring.service.pessoa.PessoaService;
+import br.com.fullstackAngularSpring.service.PessoaService;
 
 @RestController()
 @RequestMapping("/pessoa")

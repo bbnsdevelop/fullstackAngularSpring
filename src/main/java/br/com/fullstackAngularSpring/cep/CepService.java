@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.service.cep;
+package br.com.fullstackAngularSpring.cep;
 
 import br.com.fullstackAngularSpring.rest.response.CepEnderecoResponse;
 

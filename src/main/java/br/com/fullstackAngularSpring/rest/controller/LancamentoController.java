@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fullstackAngularSpring.rest.dataTransferObject.LancamentoDto;
 import br.com.fullstackAngularSpring.rest.resource.LancamentoResource;
-import br.com.fullstackAngularSpring.service.lancamento.LancamentoService;
+import br.com.fullstackAngularSpring.service.LancamentoService;
 
 @RestController
 @RequestMapping("/lancamentos")

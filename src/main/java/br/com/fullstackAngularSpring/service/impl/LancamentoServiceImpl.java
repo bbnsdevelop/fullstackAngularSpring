@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.service.impl.lancamento;
+package br.com.fullstackAngularSpring.service.impl;
 
 import java.util.List;
 
@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 
 import br.com.fullstackAngularSpring.enumerator.PessoaEnum;
 import br.com.fullstackAngularSpring.mapper.LancamentoMapper;
-import br.com.fullstackAngularSpring.model.categoria.Categoria;
-import br.com.fullstackAngularSpring.model.lancamento.Lancamento;
-import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
-import br.com.fullstackAngularSpring.repository.categoria.CategoriaRepository;
-import br.com.fullstackAngularSpring.repository.lancamento.LancamentoRepository;
-import br.com.fullstackAngularSpring.repository.pessoa.PessoaRepository;
+import br.com.fullstackAngularSpring.model.Categoria;
+import br.com.fullstackAngularSpring.model.Lancamento;
+import br.com.fullstackAngularSpring.model.Pessoa;
+import br.com.fullstackAngularSpring.repository.CategoriaRepository;
+import br.com.fullstackAngularSpring.repository.LancamentoRepository;
+import br.com.fullstackAngularSpring.repository.PessoaRepository;
 import br.com.fullstackAngularSpring.rest.dataTransferObject.LancamentoDto;
+import br.com.fullstackAngularSpring.service.LancamentoService;
 import br.com.fullstackAngularSpring.service.exceptions.PessoaInativaException;
-import br.com.fullstackAngularSpring.service.lancamento.LancamentoService;
 
 @Service
 public class LancamentoServiceImpl implements LancamentoService {

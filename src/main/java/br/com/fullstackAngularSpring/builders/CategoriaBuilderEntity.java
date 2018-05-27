@@ -1,6 +1,6 @@
 package br.com.fullstackAngularSpring.builders;
 
-import br.com.fullstackAngularSpring.model.categoria.Categoria;
+import br.com.fullstackAngularSpring.model.Categoria;
 
 public class CategoriaBuilderEntity {
 	private String name;

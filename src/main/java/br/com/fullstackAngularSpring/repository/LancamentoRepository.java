@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.repository.lancamento;
+package br.com.fullstackAngularSpring.repository;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import br.com.fullstackAngularSpring.model.lancamento.Lancamento;
+import br.com.fullstackAngularSpring.model.Lancamento;
 
 @Repository
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long>{

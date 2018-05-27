@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.service.cep.impl;
+package br.com.fullstackAngularSpring.cep.impl;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
+import br.com.fullstackAngularSpring.cep.CepService;
 import br.com.fullstackAngularSpring.rest.response.CepEnderecoResponse;
-import br.com.fullstackAngularSpring.service.cep.CepService;
 
 @Service
 public class CepServiceImpl implements CepService{

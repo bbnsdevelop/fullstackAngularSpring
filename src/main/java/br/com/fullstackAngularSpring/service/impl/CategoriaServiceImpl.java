@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.service.impl.categoria;
+package br.com.fullstackAngularSpring.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import br.com.fullstackAngularSpring.builders.CategoriaBuilderEntity;
 import br.com.fullstackAngularSpring.builders.CategoriaResponseBuilder;
 import br.com.fullstackAngularSpring.exceptions.FindException;
-import br.com.fullstackAngularSpring.model.categoria.Categoria;
-import br.com.fullstackAngularSpring.repository.categoria.CategoriaRepository;
+import br.com.fullstackAngularSpring.model.Categoria;
+import br.com.fullstackAngularSpring.repository.CategoriaRepository;
 import br.com.fullstackAngularSpring.rest.request.CategoriaRequest;
 import br.com.fullstackAngularSpring.rest.response.CategoriaResponse;
 import br.com.fullstackAngularSpring.rest.response.CategoriaResponseList;
-import br.com.fullstackAngularSpring.service.categoria.CategoriaService;
+import br.com.fullstackAngularSpring.service.CategoriaService;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService{

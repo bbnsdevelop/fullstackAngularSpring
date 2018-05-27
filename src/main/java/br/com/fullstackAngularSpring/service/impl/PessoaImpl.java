@@ -1,4 +1,4 @@
-package br.com.fullstackAngularSpring.service.impl.pessoa;
+package br.com.fullstackAngularSpring.service.impl;
 
 import static java.util.Objects.isNull;
 
@@ -17,14 +17,14 @@ import br.com.fullstackAngularSpring.builders.PessoaEntityBuilder;
 import br.com.fullstackAngularSpring.builders.PessoaResponseBuilder;
 import br.com.fullstackAngularSpring.enumerator.PessoaEnum;
 import br.com.fullstackAngularSpring.exceptions.PessoaException;
-import br.com.fullstackAngularSpring.model.endereco.Endereco;
-import br.com.fullstackAngularSpring.model.pessoa.Pessoa;
-import br.com.fullstackAngularSpring.repository.endereco.EnderecoRepository;
-import br.com.fullstackAngularSpring.repository.pessoa.PessoaRepository;
+import br.com.fullstackAngularSpring.model.Endereco;
+import br.com.fullstackAngularSpring.model.Pessoa;
+import br.com.fullstackAngularSpring.repository.EnderecoRepository;
+import br.com.fullstackAngularSpring.repository.PessoaRepository;
 import br.com.fullstackAngularSpring.rest.request.PessoaRequest;
 import br.com.fullstackAngularSpring.rest.response.EnderecoResponse;
 import br.com.fullstackAngularSpring.rest.response.PessoaResponse;
-import br.com.fullstackAngularSpring.service.pessoa.PessoaService;
+import br.com.fullstackAngularSpring.service.PessoaService;
 
 @Service
 public class PessoaImpl implements PessoaService{
@@ -47,14 +47,16 @@ public class PessoaImpl implements PessoaService{
 				.cpf(request.getCpf())
 				.dataNascimento(request.getDataNascimento())
 				.nome(request.getNome())
-				.rg(request.getRg());
+				.rg(request.getRg())
+				.ativo(request.getAtivo());
 		Pessoa pessoa = pessoaRepository.save(pessoaBuilder.build());
 		PessoaResponseBuilder pessoaResponseBuilder = PessoaResponseBuilder.create()
 				.id(pessoa.getId())
 				.cpf(pessoa.getCpf())
 				.dataNascimento(pessoa.getDataNascimento())
 				.nome(pessoa.getNome())
-				.rg(pessoa.getRg());
+				.rg(pessoa.getRg())
+				.ativo(pessoa.getFlagAtivo());
 		PessoaResponse response = pessoaResponseBuilder.build();
 		List<Endereco> enderecos = new ArrayList<>();
 		if(request.getEnderecos().size() > 0) {
@@ -75,23 +77,24 @@ public class PessoaImpl implements PessoaService{
 			pessoa.setEnderecos(enderecoRepository.saveAll(enderecos));
 		}
 		List<EnderecoResponse> enderecosResponse = new ArrayList<>();
-		pessoa.getEnderecos().stream().forEach(end ->{
-			EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
-					.id(end.getCodigo())
-					.logradouro(end.getLogradouro())
-					.numero(end.getNumero())
-					.complemento(end.getComplemento() != null ? end.getComplemento() : "")
-					.bairro(end.getBairro())
-					.cep(end.getCep())
-					.localidade(end.getCidade())
-					.uf(end.getEstado())
-					.pessoaId(end.getPessoa().getId())
-					.enderecoPrincipal(end.getFlagEnderecoPrincipal());
-			enderecosResponse.add(endBuilderResponse.build());	
-		});
-		response.setEnderecos(enderecosResponse);
+		if(pessoa.getEnderecos().size() > 0) {
+			pessoa.getEnderecos().stream().forEach(end ->{
+				EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
+						.id(end.getCodigo())
+						.logradouro(end.getLogradouro())
+						.numero(end.getNumero())
+						.complemento(end.getComplemento() != null ? end.getComplemento() : "")
+						.bairro(end.getBairro())
+						.cep(end.getCep())
+						.localidade(end.getCidade())
+						.uf(end.getEstado())
+						.pessoaId(end.getPessoa().getId())
+						.enderecoPrincipal(end.getFlagEnderecoPrincipal());
+				enderecosResponse.add(endBuilderResponse.build());	
+			});
+			response.setEnderecos(enderecosResponse);
+		}
 		return response;
-		
 	}
 
 	@Override
