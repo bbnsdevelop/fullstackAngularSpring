@@ -59,7 +59,7 @@ public class PessoaImpl implements PessoaService{
 				.ativo(pessoa.getFlagAtivo());
 		PessoaResponse response = pessoaResponseBuilder.build();
 		List<Endereco> enderecos = new ArrayList<>();
-		if(request.getEnderecos().size() > 0) {
+		if(null != request.getEnderecos()) {
 			request.getEnderecos().stream().forEach(end ->{
 				EnderecoEntityBuilder endBuilder = EnderecoEntityBuilder.create()
 						.bairro(end.getBairro())
@@ -77,7 +77,7 @@ public class PessoaImpl implements PessoaService{
 			pessoa.setEnderecos(enderecoRepository.saveAll(enderecos));
 		}
 		List<EnderecoResponse> enderecosResponse = new ArrayList<>();
-		if(pessoa.getEnderecos().size() > 0) {
+		if(null != pessoa.getEnderecos()) {
 			pessoa.getEnderecos().stream().forEach(end ->{
 				EnderecoResponseBuilder endBuilderResponse = EnderecoResponseBuilder.create()
 						.id(end.getCodigo())
