@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import br.com.fullstackAngularSpring.rest.dataTransferObject.LancamentoDto;
 
 public interface LancamentoResource {
-	ResponseEntity<?> buscaLancamentoPorPessoa(Long id);
+	ResponseEntity<?> buscaLancamentoPorid(Long id);
 	ResponseEntity<?> buscaLancamentosPaginacao(Long id, Pageable page);
 	ResponseEntity<?> deletarLancamento(Long id);
 	ResponseEntity<?> buscaLancamentos();

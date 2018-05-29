@@ -3,6 +3,7 @@ package br.com.fullstackAngularSpring.rest.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,8 +27,8 @@ public class LancamentoController implements LancamentoResource{
 	
 	@Override
 	@GetMapping("/{id}")
-	public ResponseEntity<?> buscaLancamentoPorPessoa(@PathVariable("id") Long id) {
-		return ResponseEntity.status(HttpStatus.OK).body(lancamentoService.findByPessoa(id));
+	public ResponseEntity<?> buscaLancamentoPorid(@PathVariable("id") Long id) {
+		return ResponseEntity.status(HttpStatus.OK).body(lancamentoService.findByLancamentoId(id));
 	}
 
 	@Override
@@ -47,6 +48,12 @@ public class LancamentoController implements LancamentoResource{
 	public ResponseEntity<?> deletarLancamento(@PathVariable("id") Long id) {
 		lancamentoService.deleteLancamentoId(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
+
+	@Override
+	@GetMapping("pessoa/{id}")
+	public ResponseEntity<?> buscaLancamentosPaginacao(@PathVariable("id") Long id, Pageable page) {
+		return ResponseEntity.status(HttpStatus.OK).body(lancamentoService.findLancamentosByPessoaId(id, page));
 	}
 
 

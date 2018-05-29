@@ -3,6 +3,8 @@ package br.com.fullstackAngularSpring.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.fullstackAngularSpring.enumerator.PessoaEnum;
@@ -52,14 +54,19 @@ public class LancamentoServiceImpl implements LancamentoService {
 	}
 
 	@Override
-	public List<LancamentoDto> findByPessoa(Long id) {
-		List<LancamentoDto> listaDto = lancamentoMapper.toDto(lacamentoRepository.findByPessoaId(id));
+	public LancamentoDto findByLancamentoId(Long id) {
+		LancamentoDto listaDto = lancamentoMapper.toDto(lacamentoRepository.findById(id).get());
 		return listaDto;
 	}
 
 	@Override
 	public void deleteLancamentoId(Long id) {
 		lacamentoRepository.deleteById(id);		
+	}
+
+	@Override
+	public Page<LancamentoDto> findLancamentosByPessoaId(Long id, Pageable page) {
+		return lacamentoRepository.findByPessoaId(id, page).map(lancamentoMapper::toDto);
 	}
 
 }
