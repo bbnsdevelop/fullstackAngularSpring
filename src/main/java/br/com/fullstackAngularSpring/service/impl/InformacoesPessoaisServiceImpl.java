@@ -3,6 +3,8 @@ package br.com.fullstackAngularSpring.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import br.com.fullstackAngularSpring.service.InformacoesPessoaisService;
 @Service
 public class InformacoesPessoaisServiceImpl implements InformacoesPessoaisService{
 	
+	private static final Logger log = LoggerFactory.getLogger(InformacoesPessoaisServiceImpl.class);
+	
 	private List<EnderecoResponse> enderecos; 
 	private PessoaResponse pessoaResponse; 
 	
@@ -26,6 +30,7 @@ public class InformacoesPessoaisServiceImpl implements InformacoesPessoaisServic
 
 	@Override
 	public DadosPessoaisResponse infoAll() {
+		log.info("buscando informações dos usuários");
 		DadosPessoaisResponse info = new DadosPessoaisResponse();
 		this.enderecos = new ArrayList<>();
 		List<PessoaResponse> pessoas =  new ArrayList<>();
@@ -60,7 +65,7 @@ public class InformacoesPessoaisServiceImpl implements InformacoesPessoaisServic
 
 	@Override
 	public PessoaResponse buscaPorCpf(String cpf) {
-		
+		log.info("buscando informações dos usuários por cpf: " + cpf);
 		Pessoa pessoa = pessoaRepository.findByCpf(cpf);		
 		this.enderecos = new ArrayList<>();
 		pessoa.getEnderecos().stream().forEach(end ->{

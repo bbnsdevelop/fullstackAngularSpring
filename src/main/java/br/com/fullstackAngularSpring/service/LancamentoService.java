@@ -1,5 +1,6 @@
 package br.com.fullstackAngularSpring.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -18,5 +19,7 @@ public interface LancamentoService {
 	void deleteLancamentoId(Long id);
 
 	Page<LancamentoDto> findLancamentosByPessoaId(Long id, Pageable page);
+	
+	Page<LancamentoDto> findLancamentosByPessoaIdAndDataVencimento(Long id, LocalDate dataVencimentoInicio, LocalDate dataVencimentoFim, Pageable page);
 
 }

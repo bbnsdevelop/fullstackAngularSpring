@@ -1,9 +1,12 @@
 package br.com.fullstackAngularSpring.rest.controller;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,6 +57,14 @@ public class LancamentoController implements LancamentoResource{
 	@GetMapping("pessoa/{id}")
 	public ResponseEntity<?> buscaLancamentosPaginacao(@PathVariable("id") Long id, Pageable page) {
 		return ResponseEntity.status(HttpStatus.OK).body(lancamentoService.findLancamentosByPessoaId(id, page));
+	}
+	
+	@Override
+	@GetMapping("pessoa/{id}/{dataVencimentoInicio}/{dataVencimentoFim}")
+	public ResponseEntity<?> buscaLancamentosPaginacaoDataVenimento(@PathVariable("id") Long id, 
+																	@PathVariable("dataVencimentoInicio") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataVencimentoInicio, 
+																	@PathVariable("dataVencimentoFim") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dataVencimentoFim, Pageable page) {
+		return ResponseEntity.status(HttpStatus.OK).body(lancamentoService.findLancamentosByPessoaIdAndDataVencimento(id, dataVencimentoInicio, dataVencimentoFim,  page));
 	}
 
 

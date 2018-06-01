@@ -3,6 +3,8 @@ package br.com.fullstackAngularSpring.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +20,14 @@ import br.com.fullstackAngularSpring.service.CategoriaService;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService{
+	private static final Logger log = LoggerFactory.getLogger(CategoriaServiceImpl.class);
 	
 	@Autowired
 	CategoriaRepository categoriaRepository;
 	
 	@Override
 	public CategoriaResponseList getAll() {
+		log.info("busca de todas as categorias");
 		List<CategoriaResponse> listaCategorias = new ArrayList<>();
 		categoriaRepository.findAll().stream().forEach(c ->{
 			CategoriaResponseBuilder buildResponse = CategoriaResponseBuilder.create()
@@ -37,6 +41,7 @@ public class CategoriaServiceImpl implements CategoriaService{
 	}
 	@Override
 	public CategoriaResponse getById(Long id) {
+		log.info("busca de categoria por id:"+ id);
 		Categoria categoria = categoriaRepository.findById(id).orElseThrow(FindException::new);
 		CategoriaResponseBuilder buildResponse = CategoriaResponseBuilder.create()
 				.id(categoria.getId())
@@ -45,6 +50,7 @@ public class CategoriaServiceImpl implements CategoriaService{
 	}
 	@Override
 	public CategoriaResponse create(CategoriaRequest requeste) {
+		log.info("Criando uma categoria");
 		CategoriaBuilderEntity builderEntity = CategoriaBuilderEntity.create()
 				.name(requeste.getNomeCategoria());
 		Categoria categoria = categoriaRepository.save(builderEntity.build());

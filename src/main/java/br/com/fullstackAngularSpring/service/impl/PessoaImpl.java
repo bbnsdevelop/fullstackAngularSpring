@@ -5,6 +5,8 @@ import static java.util.Objects.isNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -28,7 +30,7 @@ import br.com.fullstackAngularSpring.service.PessoaService;
 
 @Service
 public class PessoaImpl implements PessoaService{
-	
+	private static final Logger log = LoggerFactory.getLogger(PessoaImpl.class);
 	private PessoaRepository pessoaRepository;
 	private MessageSource menssageSource;
 	private Pessoa pessoa;
@@ -43,6 +45,7 @@ public class PessoaImpl implements PessoaService{
 	
 	@Override
 	public PessoaResponse criar(PessoaRequest request) {
+		log.info("Salvando pessoa");
 		PessoaEntityBuilder pessoaBuilder = PessoaEntityBuilder.create()
 				.cpf(request.getCpf())
 				.dataNascimento(request.getDataNascimento())
@@ -60,6 +63,7 @@ public class PessoaImpl implements PessoaService{
 		PessoaResponse response = pessoaResponseBuilder.build();
 		List<Endereco> enderecos = new ArrayList<>();
 		if(null != request.getEnderecos()) {
+			log.info("Validando endereço da pessoa");
 			request.getEnderecos().stream().forEach(end ->{
 				EnderecoEntityBuilder endBuilder = EnderecoEntityBuilder.create()
 						.bairro(end.getBairro())
@@ -73,7 +77,8 @@ public class PessoaImpl implements PessoaService{
 						.pessoa(pessoa)
 						.uf(end.getUf());
 				enderecos.add(endBuilder.build());
-			});		
+			});
+			log.info("Salvando endereço pessoa");
 			pessoa.setEnderecos(enderecoRepository.saveAll(enderecos));
 		}
 		List<EnderecoResponse> enderecosResponse = new ArrayList<>();
@@ -99,6 +104,7 @@ public class PessoaImpl implements PessoaService{
 
 	@Override
 	public List<PessoaResponse> getAll() {
+		log.info("buscando todas as pessoas");
 		List<PessoaResponse> pessoas = new ArrayList<>();
 		pessoaRepository.findAll().stream().forEach(p ->{
 			PessoaResponseBuilder builder = PessoaResponseBuilder.create()
@@ -120,6 +126,7 @@ public class PessoaImpl implements PessoaService{
 
 	@Override
 	public PessoaResponse upDatePessoa(PessoaRequest request) {
+		log.info("Atualizando dados da pessoa");
 		if(isNull(request.getId())) {
 			throw new PessoaException(menssageSource.getMessage("mensagem.erro-update-id", null, LocaleContextHolder.getLocale()));
 		}
@@ -146,6 +153,7 @@ public class PessoaImpl implements PessoaService{
 
 	@Override
 	public PessoaResponse buscaPorId(Long id) {
+		log.info("Buscando pessoa por id: " + id);
 		List<EnderecoResponse> enderecos = new ArrayList<>();
 		if(isNull(id)) {
 			throw new PessoaException(menssageSource.getMessage("mensagem.erro-id", null, LocaleContextHolder.getLocale()));
@@ -181,6 +189,7 @@ public class PessoaImpl implements PessoaService{
 
 	@Override
 	public PessoaResponse upDatePessoa(Long id, PessoaRequest request) {
+		log.info("Atualizando dados da pessoa");
 		this.pessoa = new Pessoa();
 		if(isNull(id)) {
 			throw new PessoaException(menssageSource.getMessage("mensagem.erro-update-id", null, LocaleContextHolder.getLocale()));
