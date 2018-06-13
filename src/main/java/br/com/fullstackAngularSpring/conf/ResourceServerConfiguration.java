@@ -13,19 +13,16 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-	private static final String RESOURCE_ID = "resource_id";
-	
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 		.inMemoryAuthentication()
-			.withUser("admin").password("admin").roles("ROLE");
+			.withUser("admin").password("{noop}admin").roles("ROLE");
 	}
 
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) {
-		//resources.resourceId(RESOURCE_ID).stateless(false);
 		resources.stateless(true);
 	}
 
@@ -40,9 +37,5 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .csrf().disable();
         
-             /*   anonymous().disable()
-                .authorizeRequests()
-                .antMatchers("/users/**").authenticated()
-                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());*/
 	}
 }

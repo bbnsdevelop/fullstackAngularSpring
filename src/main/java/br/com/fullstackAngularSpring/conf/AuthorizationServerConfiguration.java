@@ -9,27 +9,20 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 	static final String CLIEN_ID = "angular";
 	static final String CLIENT_SECRET = "@angul@r";
-	static final String GRANT_TYPE = "password";
-	static final String AUTHORIZATION_CODE = "authorization_code";
-	static final String REFRESH_TOKEN = "refresh_token";
-	static final String IMPLICIT = "implicit";
 	static final String SCOPE_READ = "read";
 	static final String SCOPE_WRITE = "write";
-	static final String TRUST = "trust";
 	static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1*60*60;
     static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 6*60*60;
 	private static final String GRANT_TYPE_PASSWORD = "password";
 	
-	/*@Autowired
-	private TokenStore tokenStore;*/
-
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -41,7 +34,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 				.withClient(CLIEN_ID)
 				.secret(CLIENT_SECRET)
 				.authorizedGrantTypes(GRANT_TYPE_PASSWORD)
-				.scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
+				.scopes(SCOPE_READ, SCOPE_WRITE)
 				.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).
 				refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
 	}
@@ -49,11 +42,18 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(getTokenStore())
+				.accessTokenConverter(accessTokenConverter())
 				.authenticationManager(authenticationManager);
 	}
-	
+	@Bean
+	public JwtAccessTokenConverter accessTokenConverter() {
+		JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
+		accessTokenConverter.setSigningKey("algaworks");
+		return accessTokenConverter;
+	}
+
 	@Bean
 	public TokenStore getTokenStore() {
-		return new InMemoryTokenStore();
+		return new JwtTokenStore(accessTokenConverter());
 	}
 }
